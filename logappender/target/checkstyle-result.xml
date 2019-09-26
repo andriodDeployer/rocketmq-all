@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logappender\src\main\java\org\apache\rocketmq\logappender\common\ProducerInstance.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logappender\src\main\java\org\apache\rocketmq\logappender\log4j\RocketmqLog4jAppender.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logappender\src\main\java\org\apache\rocketmq\logappender\log4j2\RocketmqLog4j2Appender.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logappender\src\main\java\org\apache\rocketmq\logappender\logback\RocketmqLogbackAppender.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logappender\src\test\resources\log4j-example.properties">
+</file>
+</checkstyle>

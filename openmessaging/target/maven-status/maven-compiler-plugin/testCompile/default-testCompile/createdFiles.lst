@@ -1,0 +1,12 @@
+io\openmessaging\rocketmq\promise\DefaultPromiseTest$3.class
+io\openmessaging\rocketmq\producer\ProducerImplTest.class
+io\openmessaging\rocketmq\consumer\LocalMessageCacheTest.class
+io\openmessaging\rocketmq\consumer\PullConsumerImplTest.class
+io\openmessaging\rocketmq\promise\DefaultPromiseTest$4.class
+io\openmessaging\rocketmq\utils\BeanUtilsTest$CustomizedConfig.class
+io\openmessaging\rocketmq\consumer\PushConsumerImplTest$1.class
+io\openmessaging\rocketmq\utils\BeanUtilsTest.class
+io\openmessaging\rocketmq\promise\DefaultPromiseTest.class
+io\openmessaging\rocketmq\promise\DefaultPromiseTest$1.class
+io\openmessaging\rocketmq\consumer\PushConsumerImplTest.class
+io\openmessaging\rocketmq\promise\DefaultPromiseTest$2.class

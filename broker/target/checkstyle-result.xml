@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\BrokerController.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\BrokerPathConfigHelper.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\BrokerStartup.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ClientChannelInfo.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ClientHousekeepingService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ConsumerGroupEvent.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ConsumerGroupInfo.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ConsumerIdsChangeListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ConsumerManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\DefaultConsumerIdsChangeListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\net\Broker2Client.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\ProducerManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\client\rebalance\RebalanceLockManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\CommitLogDispatcherCalcBitMap.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\ConsumerFilterData.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\ConsumerFilterManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\ExpressionForRetryMessageFilter.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\ExpressionMessageFilter.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filter\MessageEvaluationContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filtersrv\FilterServerManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\filtersrv\FilterServerUtil.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\latency\BrokerFastFailure.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\latency\BrokerFixedThreadPoolExecutor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\latency\FutureTaskExt.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\longpolling\ManyPullRequest.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\longpolling\NotifyMessageArrivingListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\longpolling\PullRequest.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\longpolling\PullRequestHoldService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\mqtrace\ConsumeMessageContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\mqtrace\ConsumeMessageHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\mqtrace\SendMessageContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\mqtrace\SendMessageHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\offset\ConsumerOffsetManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\out\BrokerOuterAPI.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\pagecache\ManyMessageTransfer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\pagecache\OneMessageTransfer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\pagecache\QueryMessageTransfer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\plugin\AbstractPluginMessageStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\plugin\MessageStoreFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\plugin\MessageStorePluginContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\AbstractSendMessageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\AdminBrokerProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\ClientManageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\ConsumerManageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\EndTransactionProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\ForwardRequestProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\PullMessageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\QueryMessageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\processor\SendMessageProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\slave\SlaveSynchronize.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\subscription\SubscriptionGroupManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\topic\TopicConfigManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\AbstractTransactionalMessageCheckListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\jdbc\JDBCTransactionStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\jdbc\JDBCTransactionStoreConfig.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\OperationResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\queue\DefaultTransactionalMessageCheckListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\queue\GetResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\queue\TransactionalMessageBridge.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\queue\TransactionalMessageServiceImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\queue\TransactionalMessageUtil.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\TransactionalMessageCheckService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\TransactionalMessageService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\TransactionRecord.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\transaction\TransactionStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\util\PositiveAtomicCounter.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\broker\src\main\java\org\apache\rocketmq\broker\util\ServiceProvider.java">
+</file>
+</checkstyle>

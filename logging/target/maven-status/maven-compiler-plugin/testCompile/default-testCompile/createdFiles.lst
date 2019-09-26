@@ -1,0 +1,12 @@
+org\apache\rocketmq\logging\inner\LoggerRepositoryTest.class
+org\apache\rocketmq\logging\inner\LoggingBuilderTest.class
+org\apache\rocketmq\logging\inner\AppenderTest.class
+org\apache\rocketmq\logging\inner\LoggerTest.class
+org\apache\rocketmq\logging\BasicLoggerTest.class
+org\apache\rocketmq\logging\inner\LayoutTest.class
+org\apache\rocketmq\logging\inner\MessageFormatterTest.class
+org\apache\rocketmq\logging\InternalLoggerTest.class
+org\apache\rocketmq\logging\Slf4jLoggerFactoryTest.class
+org\apache\rocketmq\logging\inner\LoggingBuilderTest$1.class
+org\apache\rocketmq\logging\InnerLoggerFactoryTest.class
+org\apache\rocketmq\logging\inner\LevelTest.class

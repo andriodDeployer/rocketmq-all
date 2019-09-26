@@ -1,0 +1,7 @@
+org\apache\rocketmq\logappender\LogbackTest.class
+org\apache\rocketmq\logappender\log4j2Test.class
+org\apache\rocketmq\logappender\AbstractTestCase.class
+org\apache\rocketmq\logappender\Log4jTest.class
+org\apache\rocketmq\logappender\Log4jPropertiesTest.class
+org\apache\rocketmq\logappender\Log4jXmlTest.class
+org\apache\rocketmq\logappender\AbstractTestCase$1.class

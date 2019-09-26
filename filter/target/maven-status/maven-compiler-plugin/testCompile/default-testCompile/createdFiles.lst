@@ -1,0 +1,9 @@
+org\apache\rocketmq\filter\FilterSpiTest$NothingFilter.class
+org\apache\rocketmq\filter\ExpressionTest$PropertyContext.class
+org\apache\rocketmq\filter\ParserTest.class
+org\apache\rocketmq\filter\BitsArrayTest.class
+org\apache\rocketmq\filter\FilterSpiTest$NothingExpression.class
+org\apache\rocketmq\filter\ExpressionTest.class
+org\apache\rocketmq\filter\ExpressionTest$KeyValue.class
+org\apache\rocketmq\filter\FilterSpiTest.class
+org\apache\rocketmq\filter\BloomFilterTest.class

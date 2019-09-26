@@ -1,0 +1,8 @@
+org\apache\rocketmq\namesrv\processor\DefaultRequestProcessorTest.class
+org\apache\rocketmq\namesrv\routeinfo\RouteInfoManagerTest.class
+org\apache\rocketmq\namesrv\processor\ClusterTestRequestProcessorTest$1.class
+org\apache\rocketmq\namesrv\kvconfig\KVConfigManagerTest.class
+org\apache\rocketmq\namesrv\kvconfig\KVConfigSerializeWrapperTest.class
+org\apache\rocketmq\namesrv\NameServerInstanceTest.class
+org\apache\rocketmq\namesrv\processor\ClusterTestRequestProcessorTest.class
+org\apache\rocketmq\namesrv\routeinfo\BrokerHousekeepingServiceTest.class

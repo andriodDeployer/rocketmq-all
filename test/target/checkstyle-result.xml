@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\mq\MQAsyncProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\rmq\RMQAsyncSendProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\rmq\RMQBroadCastConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\rmq\RMQNormalConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\rmq\RMQNormalProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\client\rmq\RMQSqlConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\clientinterface\AbstractMQConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\clientinterface\AbstractMQProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\clientinterface\MQCollector.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\clientinterface\MQConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\clientinterface\MQProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\ConsumerFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\MessageFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\MQMessageFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\ProducerFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\SendCallBackFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\factory\TagMessage.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\listener\AbstractListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\listener\rmq\concurrent\RMQDelayListner.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\listener\rmq\concurrent\RMQNormalListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\listener\rmq\order\RMQOrderListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\message\MessageQueueMsg.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\sendresult\ResultWrapper.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\Condition.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\data\collect\DataCollector.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\data\collect\DataCollectorManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\data\collect\DataFilter.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\data\collect\impl\ListDataCollectorImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\data\collect\impl\MapDataCollectorImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\DuplicateMessageInfo.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\FileUtil.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\MQAdmin.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\MQRandomUtils.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\MQWait.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\parallel\ParallelTask.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\parallel\ParallelTaskExecutor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\parallel\Task4Test.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\RandomUtil.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\RandomUtils.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\TestUtil.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\TestUtils.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\test\src\main\java\org\apache\rocketmq\test\util\VerifyUtils.java">
+</file>
+</checkstyle>

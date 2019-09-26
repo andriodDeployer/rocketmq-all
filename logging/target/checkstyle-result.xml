@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\Appender.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\Layout.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\Level.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\Logger.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\LoggingBuilder.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\LoggingEvent.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\inner\SysLogger.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\InnerLoggerFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\InternalLogger.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\InternalLoggerFactory.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\package-info.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\logging\src\main\java\org\apache\rocketmq\logging\Slf4jLoggerFactory.java">
+</file>
+</checkstyle>

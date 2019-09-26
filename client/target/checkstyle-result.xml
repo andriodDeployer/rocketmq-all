@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\admin\MQAdminExtInner.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\ClientConfig.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\common\ClientErrorCode.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\common\ThreadLocalIndex.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\AllocateMessageQueueStrategy.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\DefaultMQPullConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\DefaultMQPushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\ConsumeConcurrentlyContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\ConsumeConcurrentlyStatus.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\ConsumeOrderlyContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\ConsumeOrderlyStatus.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\ConsumeReturnType.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\MessageListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\MessageListenerConcurrently.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\listener\MessageListenerOrderly.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MessageQueueListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MessageSelector.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MQConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MQPullConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MQPullConsumerScheduleService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\MQPushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\PullCallback.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\PullResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\PullStatus.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\PullTaskCallback.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\PullTaskContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMachineRoomNearby.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMessageQueueAveragely.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMessageQueueAveragelyByCircle.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMessageQueueByConfig.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMessageQueueByMachineRoom.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\rebalance\AllocateMessageQueueConsistentHash.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\store\LocalFileOffsetStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\store\OffsetSerializeWrapper.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\store\OffsetStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\store\ReadOffsetType.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\consumer\store\RemoteBrokerOffsetStore.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\exception\MQBrokerException.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\exception\MQClientException.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\CheckForbiddenContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\CheckForbiddenHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\ConsumeMessageContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\ConsumeMessageHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\FilterMessageContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\FilterMessageHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\SendMessageContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\hook\SendMessageHook.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\ClientRemotingProcessor.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\CommunicationMode.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\ConsumeMessageConcurrentlyService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\ConsumeMessageOrderlyService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\ConsumeMessageService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\DefaultMQPullConsumerImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\DefaultMQPushConsumerImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\MessageQueueLock.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\MQConsumerInner.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\ProcessQueue.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\PullAPIWrapper.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\PullMessageService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\PullRequest.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\PullResultExt.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\RebalanceImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\RebalancePullImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\RebalancePushImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\consumer\RebalanceService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\factory\MQClientInstance.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\FindBrokerResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\MQAdminImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\MQClientAPIImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\MQClientManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\producer\DefaultMQProducerImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\producer\MQProducerInner.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\impl\producer\TopicPublishInfo.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\latency\LatencyFaultTolerance.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\latency\LatencyFaultToleranceImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\latency\MQFaultStrategy.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\log\ClientLogger.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\MQAdmin.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\MQHelper.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\DefaultMQProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\LocalTransactionExecuter.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\LocalTransactionState.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\MessageQueueSelector.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\MQProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\selector\SelectMessageQueueByHash.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\selector\SelectMessageQueueByMachineRoom.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\selector\SelectMessageQueueByRandom.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\SendCallback.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\SendResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\SendStatus.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\TransactionCheckListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\TransactionListener.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\TransactionMQProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\producer\TransactionSendResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\QueryResult.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\stat\ConsumerStatsManager.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\AsyncTraceDispatcher.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\hook\ConsumeMessageTraceHookImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\hook\SendMessageTraceHookImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceBean.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceConstants.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceContext.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceDataEncoder.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceDispatcher.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceDispatcherType.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceTransferBean.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\trace\TraceType.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\client\src\main\java\org\apache\rocketmq\client\Validators.java">
+</file>
+</checkstyle>

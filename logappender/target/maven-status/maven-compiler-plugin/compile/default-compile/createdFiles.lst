@@ -1,0 +1,7 @@
+org\apache\rocketmq\logappender\common\ProducerInstance.class
+org\apache\rocketmq\logappender\log4j2\RocketmqLog4j2Appender$Builder.class
+org\apache\rocketmq\logappender\log4j\RocketmqLog4jAppender.class
+org\apache\rocketmq\logappender\logback\RocketmqLogbackAppender.class
+META-INF\org\apache\logging\log4j\core\config\plugins\Log4j2Plugins.dat
+org\apache\rocketmq\logappender\log4j2\RocketmqLog4j2Appender$1.class
+org\apache\rocketmq\logappender\log4j2\RocketmqLog4j2Appender.class

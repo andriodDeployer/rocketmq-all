@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="6.11.2">
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\batch\SimpleBatchProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\batch\SplitBatchProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\benchmark\Consumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\benchmark\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\benchmark\TransactionProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\broadcast\PushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\filter\Consumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\filter\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\filter\SqlConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\filter\SqlProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\openmessaging\SimpleProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\openmessaging\SimplePullConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\openmessaging\SimplePushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\operation\Consumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\operation\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\ordermessage\Consumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\ordermessage\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\quickstart\Consumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\quickstart\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\AclClient.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\AsyncProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\CachedQueue.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\Producer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\PullConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\PullConsumerTest.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\PullScheduleService.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\PushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\RandomAsyncCommit.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\simple\TestProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\tracemessage\TraceProducer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\tracemessage\TracePushConsumer.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\transaction\TransactionListenerImpl.java">
+</file>
+<file name="D:\mycode\mq\rocketmq-all-4.4.0\example\src\main\java\org\apache\rocketmq\example\transaction\TransactionProducer.java">
+</file>
+</checkstyle>

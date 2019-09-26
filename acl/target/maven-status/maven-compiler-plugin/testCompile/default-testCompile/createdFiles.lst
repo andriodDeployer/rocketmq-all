@@ -1,0 +1,7 @@
+org\apache\rocketmq\acl\plain\PlainAccessValidatorTest.class
+org\apache\rocketmq\acl\common\AclSignerTest.class
+org\apache\rocketmq\acl\plain\RemoteAddressStrategyTest.class
+org\apache\rocketmq\acl\common\PermissionTest.class
+org\apache\rocketmq\acl\common\SessionCredentialsTest.class
+org\apache\rocketmq\acl\plain\PlainPermissionLoaderTest.class
+org\apache\rocketmq\acl\common\AclUtilsTest.class

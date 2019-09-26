@@ -1,0 +1,14 @@
+org\apache\rocketmq\common\BrokerConfigTest.class
+org\apache\rocketmq\common\DataVersionTest.class
+org\apache\rocketmq\common\MessageEncodeDecodeTest.class
+org\apache\rocketmq\common\message\MessageDecoderTest.class
+org\apache\rocketmq\common\UtilAllTest$DemoConfig.class
+org\apache\rocketmq\common\message\MessageTest.class
+org\apache\rocketmq\common\MixAllTest.class
+org\apache\rocketmq\common\RegisterBrokerBodyTest.class
+org\apache\rocketmq\common\RemotingUtilTest.class
+org\apache\rocketmq\common\protocol\ConsumeStatusTest.class
+org\apache\rocketmq\common\UtilAllTest.class
+org\apache\rocketmq\common\MessageBatchTest.class
+org\apache\rocketmq\common\MQVersionTest.class
+org\apache\rocketmq\common\filter\FilterAPITest.class
