@@ -35,7 +35,7 @@ public class ConsumeQueue {
 
     private final MappedFileQueue mappedFileQueue;
     private final String topic;
-    private final int queueId;
+    private final int queueId;//consumeQueue关联的queue
     private final ByteBuffer byteBufferIndex;
 
     private final String storePath;

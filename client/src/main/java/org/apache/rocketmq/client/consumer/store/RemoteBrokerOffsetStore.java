@@ -16,13 +16,6 @@
  */
 package org.apache.rocketmq.client.consumer.store;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.concurrent.atomic.AtomicLong;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.impl.FindBrokerResult;
@@ -30,11 +23,19 @@ import org.apache.rocketmq.client.impl.factory.MQClientInstance;
 import org.apache.rocketmq.client.log.ClientLogger;
 import org.apache.rocketmq.common.MixAll;
 import org.apache.rocketmq.common.UtilAll;
-import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.common.protocol.header.QueryConsumerOffsetRequestHeader;
 import org.apache.rocketmq.common.protocol.header.UpdateConsumerOffsetRequestHeader;
+import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.remoting.exception.RemotingException;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Remote storage implementation
@@ -42,8 +43,8 @@ import org.apache.rocketmq.remoting.exception.RemotingException;
 public class RemoteBrokerOffsetStore implements OffsetStore {
     private final static InternalLogger log = ClientLogger.getLog();
     private final MQClientInstance mQClientFactory;
-    private final String groupName;
-    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable =
+    private final String groupName;//对指定的group进行管理
+    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable = //每个group对应多个mq的消费位置。
         new ConcurrentHashMap<MessageQueue, AtomicLong>();
 
     public RemoteBrokerOffsetStore(MQClientInstance mQClientFactory, String groupName) {
@@ -54,7 +55,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
     @Override
     public void load() {
     }
-
+//更新某个mq的offset。
     @Override
     public void updateOffset(MessageQueue mq, long offset, boolean increaseOnly) {
         if (mq != null) {
@@ -72,7 +73,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
             }
         }
     }
-
+//读取某个mq的offset
     @Override
     public long readOffset(final MessageQueue mq, final ReadOffsetType type) {
         if (mq != null) {
@@ -110,7 +111,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
 
         return -1;
     }
-
+//将offset的信息持久化
     @Override
     public void persistAll(Set<MessageQueue> mqs) {
         if (null == mqs || mqs.isEmpty())
@@ -124,7 +125,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
                 if (offset != null) {
                     if (mqs.contains(mq)) {
                         try {
-                            this.updateConsumeOffsetToBroker(mq, offset.get());
+                            this.updateConsumeOffsetToBroker(mq, offset.get());//讲mq的offset更新到borker上
                             log.info("[persistAll] Group: {} ClientId: {} updateConsumeOffsetToBroker {} {}",
                                 this.groupName,
                                 this.mQClientFactory.getClientId(),
@@ -164,7 +165,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
             }
         }
     }
-
+//删除某个mq的
     public void removeOffset(MessageQueue mq) {
         if (mq != null) {
             this.offsetTable.remove(mq);

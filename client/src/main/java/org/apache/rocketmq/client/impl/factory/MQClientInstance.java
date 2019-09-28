@@ -71,10 +71,10 @@ public class MQClientInstance {
     private final NettyClientConfig nettyClientConfig;
     private final MQClientAPIImpl mQClientAPIImpl;
     private final MQAdminImpl mQAdminImpl;
-    private final ConcurrentMap<String/* Topic */, TopicRouteData> topicRouteTable = new ConcurrentHashMap<String, TopicRouteData>();
+    private final ConcurrentMap<String/* Topic */, TopicRouteData> topicRouteTable = new ConcurrentHashMap<String, TopicRouteData>();//某个tipic的路由信息。
     private final Lock lockNamesrv = new ReentrantLock();
     private final Lock lockHeartbeat = new ReentrantLock();
-    private final ConcurrentMap<String/* Broker Name */, HashMap<Long/* brokerId */, String/* address */>> brokerAddrTable = //brokerName对应的集群信息
+    private final ConcurrentMap<String/* Broker Name */, HashMap<Long/* brokerId */, String/* address */>> brokerAddrTable = //集群中的brokerId和brokeraddr的对应关系。
         new ConcurrentHashMap<String, HashMap<Long, String>>();
     private final ConcurrentMap<String/* Broker Name */, HashMap<String/* address */, Integer>> brokerVersionTable =
         new ConcurrentHashMap<String, HashMap<String, Integer>>();
@@ -84,9 +84,9 @@ public class MQClientInstance {
             return new Thread(r, "MQClientFactoryScheduledThread");
         }
     });
-    private final ClientRemotingProcessor clientRemotingProcessor;
+    private final ClientRemotingProcessor clientRemotingProcessor;//处理接受到的请求，
     private final PullMessageService pullMessageService;
-    private final RebalanceService rebalanceService;
+    private final RebalanceService rebalanceService;//分配consumer和consumerQueue
     private final DefaultMQProducer defaultMQProducer;
     private final ConsumerStatsManager consumerStatsManager;
     private final AtomicLong sendHeartbeatTimesTotal = new AtomicLong(0);
@@ -120,7 +120,7 @@ public class MQClientInstance {
 
         this.rebalanceService = new RebalanceService(this);
 
-        this.defaultMQProducer = new DefaultMQProducer(MixAll.CLIENT_INNER_PRODUCER_GROUP);
+        this.defaultMQProducer = new DefaultMQProducer(MixAll.CLIENT_INNER_PRODUCER_GROUP);//消费失败的话，重新发送这个消息，可以让broker将这个重复的消息再次转发给这个consumer。为什么重复pull这个消息呢
         this.defaultMQProducer.resetClientConfig(clientConfig);
 
         this.consumerStatsManager = new ConsumerStatsManager(this.scheduledExecutorService);
@@ -209,11 +209,11 @@ public class MQClientInstance {
                     // Start request-response channel
                     this.mQClientAPIImpl.start();
                     // Start various schedule tasks
-                    this.startScheduledTask();
+                    this.startScheduledTask();//启动定时任务
                     // Start pull service
-                    this.pullMessageService.start();
+                    this.pullMessageService.start();//主要用来发送的一个后台线程
                     // Start rebalance service
-                    this.rebalanceService.start();
+                    this.rebalanceService.start();//启动reblance(做的主要工作就是重新分配queue和consumer之间的对应关系)，同时consumer向分配的queues发送第一个PullRequest。
                     // Start push service
                     this.defaultMQProducer.getDefaultMQProducerImpl().start(false);
                     log.info("the client factory [{}] start OK", this.clientId);
@@ -234,7 +234,7 @@ public class MQClientInstance {
     private void startScheduledTask() {
         if (null == this.clientConfig.getNamesrvAddr()) {
             this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-
+//定时获取nameServerAddr
                 @Override
                 public void run() {
                     try {
@@ -247,7 +247,7 @@ public class MQClientInstance {
         }
 
         this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-
+//定时从nameServer上获取topic的信息
             @Override
             public void run() {
                 try {
@@ -259,12 +259,12 @@ public class MQClientInstance {
         }, 10, this.clientConfig.getPollNameServerInterval(), TimeUnit.MILLISECONDS);
 
         this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-
+//清理OfflineBroker
             @Override
             public void run() {
                 try {
                     MQClientInstance.this.cleanOfflineBroker();
-                    MQClientInstance.this.sendHeartbeatToAllBrokerWithLock();
+                    MQClientInstance.this.sendHeartbeatToAllBrokerWithLock();//向broker发送心跳
                 } catch (Exception e) {
                     log.error("ScheduledTask sendHeartbeatToAllBroker exception", e);
                 }
@@ -276,13 +276,13 @@ public class MQClientInstance {
             @Override
             public void run() {
                 try {
-                    MQClientInstance.this.persistAllConsumerOffset();
+                    MQClientInstance.this.persistAllConsumerOffset();//定时保存offset信息到broker
                 } catch (Exception e) {
                     log.error("ScheduledTask persistAllConsumerOffset exception", e);
                 }
             }
         }, 1000 * 10, this.clientConfig.getPersistConsumerOffsetInterval(), TimeUnit.MILLISECONDS);
-
+//动态调整处理消息的线程池的大小
         this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
             @Override
@@ -605,7 +605,7 @@ public class MQClientInstance {
                                     Entry<String, MQProducerInner> entry = it.next();
                                     MQProducerInner impl = entry.getValue();
                                     if (impl != null) {
-                                        impl.updateTopicPublishInfo(topic, publishInfo);//更新发送者组里面的每个发送者的topic信息。
+                                        impl.updateTopicPublishInfo(topic, publishInfo);//更新发送者缓存每个发送者的topic信息。
                                     }
                                 }
                             }
@@ -996,10 +996,10 @@ public class MQClientInstance {
         boolean slave = false;
         boolean found = false;
 
-        HashMap<Long/* brokerId */, String/* address */> map = this.brokerAddrTable.get(brokerName);
+        HashMap<Long/* brokerId */, String/* address */> map = this.brokerAddrTable.get(brokerName);//获取集群中所有broker信息
         if (map != null && !map.isEmpty()) {
-            brokerAddr = map.get(brokerId);
-            slave = brokerId != MixAll.MASTER_ID;
+            brokerAddr = map.get(brokerId);//获取指定broker的address信息。
+            slave = brokerId != MixAll.MASTER_ID;//判断当前的broker是否是mater。
             found = brokerAddr != null;
 
             if (!found && !onlyThisBroker) {

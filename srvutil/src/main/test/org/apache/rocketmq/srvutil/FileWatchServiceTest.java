@@ -17,16 +17,17 @@
 
 package org.apache.rocketmq.srvutil;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

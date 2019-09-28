@@ -21,7 +21,7 @@
 package org.apache.rocketmq.common.protocol.heartbeat;
 
 /**
- * Message model
+ * Message model 消息模式：广播和集群
  */
 public enum MessageModel {
     /**

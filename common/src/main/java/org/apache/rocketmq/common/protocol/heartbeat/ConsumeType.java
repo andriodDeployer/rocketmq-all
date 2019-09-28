@@ -19,7 +19,7 @@
  * $Id: ConsumeType.java 1835 2013-05-16 02:00:50Z vintagewang@apache.org $
  */
 package org.apache.rocketmq.common.protocol.heartbeat;
-
+//消费类型：推和拉。推：broker向consumer推消息，拉：consumer从broker拉取消息。但是在RocketMQ的实现上，推采用的方式也拉的实现，只不过是定时的拉。
 public enum ConsumeType {
 
     CONSUME_ACTIVELY("PULL"),

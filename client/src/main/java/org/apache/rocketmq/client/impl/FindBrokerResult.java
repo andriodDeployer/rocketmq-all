@@ -17,8 +17,8 @@
 package org.apache.rocketmq.client.impl;
 
 public class FindBrokerResult {
-    private final String brokerAddr;
-    private final boolean slave;
+    private final String brokerAddr;//broker的addr，也就是指定的mq所在broker的地址信息。
+    private final boolean slave;//broker是否是slave
     private final int brokerVersion;
 
     public FindBrokerResult(String brokerAddr, boolean slave) {

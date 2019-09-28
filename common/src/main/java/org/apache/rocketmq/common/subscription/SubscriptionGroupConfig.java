@@ -19,7 +19,7 @@ package org.apache.rocketmq.common.subscription;
 
 import org.apache.rocketmq.common.MixAll;
 
-public class SubscriptionGroupConfig {
+public class SubscriptionGroupConfig {//一个消费者组，消费的信息。
 
     private String groupName;
 

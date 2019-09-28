@@ -16,17 +16,14 @@
  */
 package org.apache.rocketmq.client.impl.consumer;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.TimeUnit;
 import org.apache.rocketmq.client.impl.factory.MQClientInstance;
 import org.apache.rocketmq.client.log.ClientLogger;
 import org.apache.rocketmq.common.ServiceThread;
-import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.common.utils.ThreadUtils;
+import org.apache.rocketmq.logging.InternalLogger;
 
+import java.util.concurrent.*;
+//不断地PullRequestQueue中获取PullRequest，并将拉取请求发送到broker上，
 public class PullMessageService extends ServiceThread {
     private final InternalLogger log = ClientLogger.getLog();
     private final LinkedBlockingQueue<PullRequest> pullRequestQueue = new LinkedBlockingQueue<PullRequest>();
@@ -42,7 +39,7 @@ public class PullMessageService extends ServiceThread {
     public PullMessageService(MQClientInstance mQClientFactory) {
         this.mQClientFactory = mQClientFactory;
     }
-
+//在指定的时间后发送请求。
     public void executePullRequestLater(final PullRequest pullRequest, final long timeDelay) {
         if (!isStopped()) {
             this.scheduledExecutorService.schedule(new Runnable() {
@@ -85,14 +82,14 @@ public class PullMessageService extends ServiceThread {
             log.warn("No matched consumer for the PullRequest {}, drop it", pullRequest);
         }
     }
-
+//不断发送PullRequest到Broker拉取数据。
     @Override
     public void run() {
         log.info(this.getServiceName() + " service started");
 
         while (!this.isStopped()) {
             try {
-                PullRequest pullRequest = this.pullRequestQueue.take();
+                PullRequest pullRequest = this.pullRequestQueue.take();//取出PullRequest并发送出去。
                 this.pullMessage(pullRequest);
             } catch (InterruptedException ignored) {
             } catch (Exception e) {
