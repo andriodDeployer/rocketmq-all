@@ -71,10 +71,18 @@ public class MQAdminImpl {
         createTopic(key, newTopic, queueNum, 0);
     }
 
+    /**
+     * 向集群中的每个masterBroker发送创建topic的请求。
+     * @param key
+     * @param newTopic：创建topic的名称
+     * @param queueNum：创建的topic中含有的队列
+     * @param topicSysFlag：topic的读写属性信息
+     * @throws MQClientException
+     */
     public void createTopic(String key, String newTopic, int queueNum, int topicSysFlag) throws MQClientException {
         try {
             TopicRouteData topicRouteData = this.mQClientFactory.getMQClientAPIImpl().getTopicRouteInfoFromNameServer(key, timeoutMillis);
-            List<BrokerData> brokerDataList = topicRouteData.getBrokerDatas();
+            List<BrokerData> brokerDataList = topicRouteData.getBrokerDatas();//获取所有主从Broker集群的信息
             if (brokerDataList != null && !brokerDataList.isEmpty()) {
                 Collections.sort(brokerDataList);
 
@@ -83,22 +91,22 @@ public class MQAdminImpl {
 
                 StringBuilder orderTopicString = new StringBuilder();
 
-                for (BrokerData brokerData : brokerDataList) {
-                    String addr = brokerData.getBrokerAddrs().get(MixAll.MASTER_ID);
+                for (BrokerData brokerData : brokerDataList) {//遍历每个集群
+                    String addr = brokerData.getBrokerAddrs().get(MixAll.MASTER_ID);//获取集群中的Master信息
                     if (addr != null) {//masterBroker的地址
-                        TopicConfig topicConfig = new TopicConfig(newTopic);
+                        TopicConfig topicConfig = new TopicConfig(newTopic);//封装创建topic的信息
                         topicConfig.setReadQueueNums(queueNum);
                         topicConfig.setWriteQueueNums(queueNum);
                         topicConfig.setTopicSysFlag(topicSysFlag);
 
                         boolean createOK = false;
-                        for (int i = 0; i < 5; i++) {
-                            try {
+                        for (int i = 0; i < 5; i++) {//失败可以重试4次
+                            try {//向每个masterBroker发送创建topic的请求。
                                 this.mQClientFactory.getMQClientAPIImpl().createTopic(addr, key, topicConfig, timeoutMillis);
                                 createOK = true;
                                 createOKAtLeastOnce = true;
                                 break;
-                            } catch (Exception e) {
+                            } catch (Exception e) {//有可能是超时异常，导致发送创建Topic请求重复，服务端要做幂等性处理。
                                 if (4 == i) {
                                     exception = new MQClientException("create topic to broker exception", e);
                                 }

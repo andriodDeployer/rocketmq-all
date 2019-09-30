@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * BrokerData是一个主从Broker集群的信息
+ */
 public class BrokerData implements Comparable<BrokerData> {//一个borker集群中broker信息。
     private String cluster;
     private String brokerName;

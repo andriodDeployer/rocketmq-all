@@ -285,11 +285,11 @@ public class DefaultRequestProcessor implements NettyRequestProcessor {
         }
 
         RegisterBrokerResult result = this.namesrvController.getRouteInfoManager().registerBroker(
-            requestHeader.getClusterName(),//集群名称
-            requestHeader.getBrokerAddr(),//注册的borker的地址
-            requestHeader.getBrokerName(),//注册的borker的名称
-            requestHeader.getBrokerId(),//注册的borker的id
-            requestHeader.getHaServerAddr(),//注册borer的所在集群的地址
+            requestHeader.getClusterName(),
+            requestHeader.getBrokerAddr(),
+            requestHeader.getBrokerName(),
+            requestHeader.getBrokerId(),
+            requestHeader.getHaServerAddr(),
             topicConfigWrapper,
             null,
             ctx.channel()

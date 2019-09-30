@@ -25,6 +25,13 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+/**ConsumeQueue代表的就是一个队列/分区，主要用来封装分区的内容：分区id(queueuId)，分区内容持久化(mappedFileQueue和当前的mappedFileSize)
+ * 分区所属的topic，
+ * 分区内容，就是一个个大小为20的单元组成。20字节的内容：8字节：数据在commitLog中的offset，4字节：数据的长度，也就是从commitLog中读取数据长度。8字节的数据附加消息。
+ *
+ *
+ */
+
 public class ConsumeQueue {
     private static final InternalLogger log = InternalLoggerFactory.getLogger(LoggerName.STORE_LOGGER_NAME);
 

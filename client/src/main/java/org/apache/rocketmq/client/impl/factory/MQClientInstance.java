@@ -149,7 +149,7 @@ public class MQClientInstance {
             info.setOrderTopic(true);
         } else {
             List<QueueData> qds = route.getQueueDatas();
-            Collections.sort(qds);
+            Collections.sort(qds);//按照brokerName进行排序
             for (QueueData qd : qds) {
                 if (PermName.isWriteable(qd.getPerm())) {
                     BrokerData brokerData = null;
@@ -169,12 +169,12 @@ public class MQClientInstance {
                     }
 
                     for (int i = 0; i < qd.getWriteQueueNums(); i++) {
-                        MessageQueue mq = new MessageQueue(topic, qd.getBrokerName(), i);
+                        MessageQueue mq = new MessageQueue(topic, qd.getBrokerName(), i);//id就是从0-writeQueuenum的。
                         info.getMessageQueueList().add(mq);
                     }
                 }
             }
-
+            //所有borkerName上的mq一共有：master的个数*qd.getWriteQueueNames个。这样来说，创建一个topic，具体分布在哪个broker上是不确定的，因为对于nameServer来说每个Broker的地位是平等对的。
             info.setOrderTopic(false);
         }
 

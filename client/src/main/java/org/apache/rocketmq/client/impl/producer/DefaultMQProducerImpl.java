@@ -630,7 +630,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
         TopicPublishInfo topicPublishInfo = this.topicPublishInfoTable.get(topic);
         if (null == topicPublishInfo || !topicPublishInfo.ok()) {
             this.topicPublishInfoTable.putIfAbsent(topic, new TopicPublishInfo());
-            this.mQClientFactory.updateTopicRouteInfoFromNameServer(topic);
+            this.mQClientFactory.updateTopicRouteInfoFromNameServer(topic);//从nameSever上获取制定topic的信息。queue分布等。
             topicPublishInfo = this.topicPublishInfoTable.get(topic);
         }
 
@@ -652,7 +652,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
         long beginStartTime = System.currentTimeMillis();
         String brokerAddr = this.mQClientFactory.findBrokerAddressInPublish(mq.getBrokerName());//找到mq所在的集群的master节点(mq本身可能不在master上)
         if (null == brokerAddr) {
-            tryToFindTopicPublishInfo(mq.getTopic());
+            tryToFindTopicPublishInfo(mq.getTopic());//从nameserver同步一下数据
             brokerAddr = this.mQClientFactory.findBrokerAddressInPublish(mq.getBrokerName());
         }
 

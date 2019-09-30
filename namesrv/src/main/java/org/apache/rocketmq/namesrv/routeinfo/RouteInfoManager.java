@@ -46,8 +46,8 @@ public class RouteInfoManager {
     private final ReadWriteLock lock = new ReentrantReadWriteLock();
     private final HashMap<String/* topic */, List<QueueData>> topicQueueTable;//主题和队列对应关系，队列信息保存在QueueData中
     private final HashMap<String/* brokerName */, BrokerData> brokerAddrTable;//brokerName是一组broker的名字，一组broker中有多个broker
-    private final HashMap<String/* clusterName */, Set<String/* brokerName */>> clusterAddrTable;//brokerName和cluster关系。
-    private final HashMap<String/* brokerAddr */, BrokerLiveInfo> brokerLiveTable;
+    private final HashMap<String/* clusterName */, Set<String/* brokerName */>> clusterAddrTable;//集群信息。
+    private final HashMap<String/* brokerAddr */, BrokerLiveInfo> brokerLiveTable;//每个broker的信息：该broker的存活信息，如上一次心跳时间等。
     private final HashMap<String/* brokerAddr */, List<String>/* Filter Server */> filterServerTable;
 //对于以上的数据结构，主要看的是维护这些数据结构的代码，也就是：who，when，what写进去。who when读数据。
     public RouteInfoManager() {
@@ -95,8 +95,8 @@ public class RouteInfoManager {
     }
 
     public RegisterBrokerResult registerBroker(
-        final String clusterName,
-        final String brokerAddr,
+        final String clusterName,//集群名称
+        final String brokerAddr,//broker
         final String brokerName,
         final long brokerId,
         final String haServerAddr,
@@ -108,6 +108,7 @@ public class RouteInfoManager {
             try {
                 this.lock.writeLock().lockInterruptibly();//使用锁保证以上5个数据结构操作的数据一致性。可能会有多个borker进行同时注册
 
+                //记录大集群(多个master-slave)中的多个小集群(每个master-slave)
                 Set<String> brokerNames = this.clusterAddrTable.get(clusterName);
                 if (null == brokerNames) {
                     brokerNames = new HashSet<String>();
@@ -117,6 +118,7 @@ public class RouteInfoManager {
 
                 boolean registerFirst = false;
 
+                //记录每个集群中的broker信息：brokerId和brokerAddr
                 BrokerData brokerData = this.brokerAddrTable.get(brokerName);
                 if (null == brokerData) {
                     registerFirst = true;
@@ -127,14 +129,14 @@ public class RouteInfoManager {
                 registerFirst = registerFirst || (null == oldAddr);
 
                 if (null != topicConfigWrapper
-                    && MixAll.MASTER_ID == brokerId) {
-                    if (this.isBrokerTopicConfigChanged(brokerAddr, topicConfigWrapper.getDataVersion())
+                    && MixAll.MASTER_ID == brokerId) {//只有是master发送过来的topic注册过来信息，才有可能执行下面的逻辑，因为slave不可能更新topic信息的。
+                    if (this.isBrokerTopicConfigChanged(brokerAddr, topicConfigWrapper.getDataVersion())//因为只有maser才会发送topic的更新或者新增请求，只有当topic发生了变化，才会更新queue信息。
                         || registerFirst) {
                         ConcurrentMap<String, TopicConfig> tcTable =
                             topicConfigWrapper.getTopicConfigTable();
                         if (tcTable != null) {
                             for (Map.Entry<String, TopicConfig> entry : tcTable.entrySet()) {
-                                this.createAndUpdateQueueData(brokerName, entry.getValue());
+                                this.createAndUpdateQueueData(brokerName, entry.getValue());// TODO: 2019/9/30 只说明了，那个topic对应的queue个数信息，而已，没有对应那些queue分配到那些broker上?
                             }
                         }
                     }
@@ -360,6 +362,7 @@ public class RouteInfoManager {
         boolean foundQueueData = false;
         boolean foundBrokerData = false;
         Set<String> brokerNameSet = new HashSet<String>();
+
         List<BrokerData> brokerDataList = new LinkedList<BrokerData>();
         topicRouteData.setBrokerDatas(brokerDataList);
 

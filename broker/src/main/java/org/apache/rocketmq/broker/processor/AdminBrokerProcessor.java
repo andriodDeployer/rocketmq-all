@@ -75,7 +75,7 @@ public class AdminBrokerProcessor implements NettyRequestProcessor {
     public RemotingCommand processRequest(ChannelHandlerContext ctx,
         RemotingCommand request) throws RemotingCommandException {
         switch (request.getCode()) {
-            case RequestCode.UPDATE_AND_CREATE_TOPIC:
+            case RequestCode.UPDATE_AND_CREATE_TOPIC://创建topic
                 return this.updateAndCreateTopic(ctx, request);
             case RequestCode.DELETE_TOPIC_IN_BROKER:
                 return this.deleteTopic(ctx, request);
@@ -173,7 +173,7 @@ public class AdminBrokerProcessor implements NettyRequestProcessor {
             response.setRemark(errorMsg);
             return response;
         }
-
+//创建topic是一个异步的过程
         try {
             response.setCode(ResponseCode.SUCCESS);
             response.setOpaque(request.getOpaque());
@@ -190,9 +190,9 @@ public class AdminBrokerProcessor implements NettyRequestProcessor {
         topicConfig.setTopicFilterType(requestHeader.getTopicFilterTypeEnum());
         topicConfig.setPerm(requestHeader.getPerm());
         topicConfig.setTopicSysFlag(requestHeader.getTopicSysFlag() == null ? 0 : requestHeader.getTopicSysFlag());
-
-        this.brokerController.getTopicConfigManager().updateTopicConfig(topicConfig);
-
+//
+        this.brokerController.getTopicConfigManager().updateTopicConfig(topicConfig);//创建、更新topic，就是在table中添加一笔数据，然后保存到文件中
+//将topic信息更新的
         this.brokerController.registerIncrementBrokerData(topicConfig,this.brokerController.getTopicConfigManager().getDataVersion());
 
         return null;

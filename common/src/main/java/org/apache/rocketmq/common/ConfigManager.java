@@ -16,11 +16,15 @@
  */
 package org.apache.rocketmq.common;
 
-import java.io.IOException;
 import org.apache.rocketmq.common.constant.LoggerName;
 import org.apache.rocketmq.logging.InternalLogger;
 import org.apache.rocketmq.logging.InternalLoggerFactory;
 
+import java.io.IOException;
+
+/**
+ * 配置管理器的抽象，具有数据持久化到文件的功能。文件的位置保存到configurFilePath中。
+ */
 public abstract class ConfigManager {
     private static final InternalLogger log = InternalLoggerFactory.getLogger(LoggerName.COMMON_LOGGER_NAME);
 
@@ -66,7 +70,7 @@ public abstract class ConfigManager {
     }
 
     public abstract void decode(final String jsonString);
-
+//配置信息持久化。
     public synchronized void persist() {
         String jsonString = this.encode(true);
         if (jsonString != null) {

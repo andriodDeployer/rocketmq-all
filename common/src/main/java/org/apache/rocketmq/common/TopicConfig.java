@@ -17,7 +17,12 @@
 package org.apache.rocketmq.common;
 
 import org.apache.rocketmq.common.constant.PermName;
-//topic的相关信息。
+
+/**topic的相关信息。
+ * topic：名称。
+ * topic中的队列个数。
+ * topic的读写权限
+ */
 public class TopicConfig {
     private static final String SEPARATOR = " ";
     public static int defaultReadQueueNums = 16;

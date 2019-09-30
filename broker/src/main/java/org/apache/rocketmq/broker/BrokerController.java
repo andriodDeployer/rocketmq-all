@@ -296,6 +296,8 @@ public class BrokerController {
                 }
             }, initialDelay, period, TimeUnit.MILLISECONDS);
 
+            //定时保存当前broker上存放的关于group消费offset的信息，
+            // TODO: 2019/9/30 consumerOffsetManager中的信息在一个broker上存放还是多个呢，如果一个是否会产生单点故障？
             this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
@@ -382,7 +384,7 @@ public class BrokerController {
                     @Override
                     public void run() {
                         try {
-                            BrokerController.this.slaveSynchronize.syncAll();
+                            BrokerController.this.slaveSynchronize.syncAll();//slave从broker上同步数据。
                         } catch (Throwable e) {
                             log.error("ScheduledTask syncAll slave exception", e);
                         }
@@ -569,6 +571,7 @@ public class BrokerController {
 
         /**
          * Default
+         * 元数据管理处理器：创建更新topic
          */
         AdminBrokerProcessor adminProcessor = new AdminBrokerProcessor(this);
         this.remotingServer.registerDefaultProcessor(adminProcessor, this.adminBrokerExecutor);
@@ -796,14 +799,15 @@ public class BrokerController {
     }
 
     public void start() throws Exception {
+        //消息存储服务
         if (this.messageStore != null) {
             this.messageStore.start();
         }
-
+        //nettyServer服务用来接收网络请求
         if (this.remotingServer != null) {
             this.remotingServer.start();
         }
-
+        //快速网络通道
         if (this.fastRemotingServer != null) {
             this.fastRemotingServer.start();
         }
@@ -811,7 +815,7 @@ public class BrokerController {
         if (this.fileWatchService != null) {
             this.fileWatchService.start();
         }
-
+        //client 主要用来向nameServer发送消息
         if (this.brokerOuterAPI != null) {
             this.brokerOuterAPI.start();
         }
@@ -827,9 +831,10 @@ public class BrokerController {
         if (this.filterServerManager != null) {
             this.filterServerManager.start();
         }
-//启动时想broker汇报自己上面的topic信息。
+//启动时向broker汇报自己上面的topic信息。
         this.registerBrokerAll(true, false, true);
-//定时想nameServer汇报信息自己上面的topic信息。
+
+//定时向nameServer汇报信息自己上面的topic信息。
         this.scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
 
             @Override
@@ -841,6 +846,7 @@ public class BrokerController {
                 }
             }
         }, 1000 * 10, Math.max(10000, Math.min(brokerConfig.getRegisterNameServerPeriod(), 60000)), TimeUnit.MILLISECONDS);
+
 
         if (this.brokerStatsManager != null) {
             this.brokerStatsManager.start();
@@ -876,6 +882,7 @@ public class BrokerController {
         doRegisterBrokerAll(true, false, topicConfigSerializeWrapper);
     }
 
+//将当前broker上的所有topic汇报给NameServer
     public synchronized void registerBrokerAll(final boolean checkOrderConfig, boolean oneway, boolean forceRegister) {
         TopicConfigSerializeWrapper topicConfigWrapper = this.getTopicConfigManager().buildTopicConfigSerializeWrapper();
 
@@ -885,7 +892,7 @@ public class BrokerController {
             for (TopicConfig topicConfig : topicConfigWrapper.getTopicConfigTable().values()) {
                 TopicConfig tmp =
                     new TopicConfig(topicConfig.getTopicName(), topicConfig.getReadQueueNums(), topicConfig.getWriteQueueNums(),
-                        this.brokerConfig.getBrokerPermission());
+                        this.brokerConfig.getBrokerPermission());//更新为最新Topic读写权限。
                 topicConfigTable.put(topicConfig.getTopicName(), tmp);
             }
             topicConfigWrapper.setTopicConfigTable(topicConfigTable);
@@ -899,14 +906,14 @@ public class BrokerController {
             doRegisterBrokerAll(checkOrderConfig, oneway, topicConfigWrapper);
         }
     }
-
+//将当前Broker中的信息汇报的所有的nameserver上去。
     private void doRegisterBrokerAll(boolean checkOrderConfig, boolean oneway,
         TopicConfigSerializeWrapper topicConfigWrapper) {
         List<RegisterBrokerResult> registerBrokerResultList = this.brokerOuterAPI.registerBrokerAll(
             this.brokerConfig.getBrokerClusterName(),
-            this.getBrokerAddr(),
-            this.brokerConfig.getBrokerName(),
-            this.brokerConfig.getBrokerId(),
+            this.getBrokerAddr(),//当前broker的addr，通常调用这个方法的是masterBroker。
+            this.brokerConfig.getBrokerName(),//当前broerk所在的集群。
+            this.brokerConfig.getBrokerId(),//当前broekr的id
             this.getHAServerAddr(),
             topicConfigWrapper,
             this.filterServerManager.buildNewFilterServerList(),
