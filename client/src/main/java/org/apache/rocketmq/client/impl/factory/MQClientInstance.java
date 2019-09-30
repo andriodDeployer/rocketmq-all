@@ -211,7 +211,7 @@ public class MQClientInstance {
                     // Start various schedule tasks
                     this.startScheduledTask();//启动定时任务
                     // Start pull service
-                    this.pullMessageService.start();//主要用来发送的一个后台线程
+                    this.pullMessageService.start();//主要用来向Broker发送PullRequest的后台线程(从一个队列中不断地取出PullRequest发送出去)
                     // Start rebalance service
                     this.rebalanceService.start();//启动reblance(做的主要工作就是重新分配queue和consumer之间的对应关系)，同时consumer向分配的queues发送第一个PullRequest。
                     // Start push service
