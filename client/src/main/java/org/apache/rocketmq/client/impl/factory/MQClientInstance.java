@@ -74,6 +74,7 @@ public class MQClientInstance {
     private final ConcurrentMap<String/* Topic */, TopicRouteData> topicRouteTable = new ConcurrentHashMap<String, TopicRouteData>();//某个tipic的路由信息。
     private final Lock lockNamesrv = new ReentrantLock();
     private final Lock lockHeartbeat = new ReentrantLock();
+    //// TODO: 2019/10/2 什么时候更新这个数据结构
     private final ConcurrentMap<String/* Broker Name */, HashMap<Long/* brokerId */, String/* address */>> brokerAddrTable = //集群中的brokerId和brokeraddr的对应关系。
         new ConcurrentHashMap<String, HashMap<Long, String>>();
     private final ConcurrentMap<String/* Broker Name */, HashMap<String/* address */, Integer>> brokerVersionTable =
@@ -251,7 +252,7 @@ public class MQClientInstance {
             @Override
             public void run() {
                 try {
-                    MQClientInstance.this.updateTopicRouteInfoFromNameServer();
+                    MQClientInstance.this.updateTopicRouteInfoFromNameServer();//定时从nameServer上更新topic分布信息
                 } catch (Exception e) {
                     log.error("ScheduledTask updateTopicRouteInfoFromNameServer exception", e);
                 }
@@ -972,7 +973,7 @@ public class MQClientInstance {
         }
 
         if (found) {
-            return new FindBrokerResult(brokerAddr, slave, findBrokerVersion(brokerName, brokerAddr));
+            return new FindBrokerResult("192.168.8.104:10911", slave, findBrokerVersion(brokerName, "192.168.8.104:10911"));
         }
 
         return null;

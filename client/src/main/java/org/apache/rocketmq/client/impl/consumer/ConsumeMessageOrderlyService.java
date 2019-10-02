@@ -266,13 +266,13 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                     log.warn("the message queue consume result is illegal, we think you want to ack these message {}",
                         consumeRequest.getMessageQueue());
                 case SUCCESS:
-                    commitOffset = consumeRequest.getProcessQueue().commit();
+                    commitOffset = consumeRequest.getProcessQueue().commit();//为processQueue特出更多的空间
                     this.getConsumerStatsManager().incConsumeOKTPS(consumerGroup, consumeRequest.getMessageQueue().getTopic(), msgs.size());
                     break;
                 case SUSPEND_CURRENT_QUEUE_A_MOMENT:
                     this.getConsumerStatsManager().incConsumeFailedTPS(consumerGroup, consumeRequest.getMessageQueue().getTopic(), msgs.size());
                     if (checkReconsumeTimes(msgs)) {
-                        consumeRequest.getProcessQueue().makeMessageToCosumeAgain(msgs);
+                        consumeRequest.getProcessQueue().makeMessageToCosumeAgain(msgs);//将这些消息重新添加进去。
                         this.submitConsumeRequestLater(
                             consumeRequest.getProcessQueue(),
                             consumeRequest.getMessageQueue(),
@@ -402,7 +402,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                 return;
             }
 
-            final Object objLock = messageQueueLock.fetchLockObject(this.messageQueue);
+            final Object objLock = messageQueueLock.fetchLockObject(this.messageQueue);//用message保证同一个队里消息消费的顺序性，不同队列消息消费并行性
             synchronized (objLock) {//体现锁的实现。同一时刻只能一个consumer在进行消费。
                 if (MessageModel.BROADCASTING.equals(ConsumeMessageOrderlyService.this.defaultMQPushConsumerImpl.messageModel())
                     || (this.processQueue.isLocked() && !this.processQueue.isLockExpired())) {
@@ -435,7 +435,8 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
 
                         final int consumeBatchSize =
                             ConsumeMessageOrderlyService.this.defaultMQPushConsumer.getConsumeMessageBatchMaxSize();
-                        //取出消息
+
+                        //取出一批消息
                         List<MessageExt> msgs = this.processQueue.takeMessags(consumeBatchSize);
                         if (!msgs.isEmpty()) {
                             final ConsumeOrderlyContext context = new ConsumeOrderlyContext(this.messageQueue);
@@ -522,7 +523,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                         //根据客户程序的处理结果，对结果进行处理，判断用户程序消费数据是成功或是失败，采用不同的处理逻辑。
                             continueConsume = ConsumeMessageOrderlyService.this.processConsumeResult(msgs, status, context, this);
                         } else {
-                            continueConsume = false;
+                            continueConsume = false;//处理完了
                         }
                     }
                 } else {

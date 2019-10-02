@@ -127,7 +127,7 @@ public class ProcessQueue {
             try {
                 int validMsgCnt = 0;
                 for (MessageExt msg : msgs) {
-                    MessageExt old = msgTreeMap.put(msg.getQueueOffset(), msg);
+                    MessageExt old = msgTreeMap.put(msg.getQueueOffset(), msg);//将消息存放到msgTreeMap中
                     if (null == old) {
                         validMsgCnt++;
                         this.queueOffsetMax = msg.getQueueOffset();
@@ -301,10 +301,10 @@ public class ProcessQueue {
             try {
                 if (!this.msgTreeMap.isEmpty()) {
                     for (int i = 0; i < batchSize; i++) {
-                        Map.Entry<Long, MessageExt> entry = this.msgTreeMap.pollFirstEntry();
+                        Map.Entry<Long, MessageExt> entry = this.msgTreeMap.pollFirstEntry();//取出并删除
                         if (entry != null) {
                             result.add(entry.getValue());
-                            consumingMsgOrderlyTreeMap.put(entry.getKey(), entry.getValue());
+                            consumingMsgOrderlyTreeMap.put(entry.getKey(), entry.getValue());//添加到正在消费的consumingMsgOrderTreeMap中
                         } else {
                             break;
                         }

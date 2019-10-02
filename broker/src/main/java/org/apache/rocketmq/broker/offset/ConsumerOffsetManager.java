@@ -32,11 +32,12 @@ import java.util.concurrent.ConcurrentMap;
 
 /**
  * 用来维护 各个consumerGroup对各个mq消费的offset。实现同一个mq对不同的consumerGroup的隔离。
+ * 有每个consumer不断地将信息发送过来
  */
 public class ConsumerOffsetManager extends ConfigManager {
     private static final InternalLogger log = InternalLoggerFactory.getLogger(LoggerName.BROKER_LOGGER_NAME);
     private static final String TOPIC_GROUP_SEPARATOR = "@";
-
+//无法区分，同一个topic在两个master上queueId相同的队列？// TODO: 2019/10/2 不会的，因为consumer从那个broker消费消息的offset会存放在那个borker上，一个broker上不会有在同一个topic中queueId相同的两个队列
     private ConcurrentMap<String/* topic@group */, ConcurrentMap<Integer, Long>> offsetTable =//格式:<topic@group,<queueId,offset>>
         new ConcurrentHashMap<String, ConcurrentMap<Integer, Long>>(512);
 

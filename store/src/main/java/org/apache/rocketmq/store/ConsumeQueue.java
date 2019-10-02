@@ -425,6 +425,14 @@ public class ConsumeQueue {
         this.defaultMessageStore.getRunningFlags().makeLogicsQueueError();
     }
 
+    /**
+     *
+     * @param offset CommitLog中的物理位置
+     * @param size 消息的长度，就是从offset开始读，读取多长的byte
+     * @param tagsCode
+     * @param cqOffset
+     * @return
+     */
     private boolean putMessagePositionInfo(final long offset, final int size, final long tagsCode,
         final long cqOffset) {
 
@@ -440,10 +448,10 @@ public class ConsumeQueue {
 
         final long expectLogicOffset = cqOffset * CQ_STORE_UNIT_SIZE;//写position？
 
-        MappedFile mappedFile = this.mappedFileQueue.getLastMappedFile(expectLogicOffset);
+        MappedFile mappedFile = this.mappedFileQueue.getLastMappedFile(expectLogicOffset);//写到那个文件中
         if (mappedFile != null) {
 
-            if (mappedFile.isFirstCreateInQueue() && cqOffset != 0 && mappedFile.getWrotePosition() == 0) {
+            if (mappedFile.isFirstCreateInQueue() && cqOffset != 0 && mappedFile.getWrotePosition() == 0) {//mappedFile是新创建的文件。
                 this.minLogicOffset = expectLogicOffset;
                 this.mappedFileQueue.setFlushedWhere(expectLogicOffset);
                 this.mappedFileQueue.setCommittedWhere(expectLogicOffset);
@@ -473,7 +481,7 @@ public class ConsumeQueue {
                 }
             }
             this.maxPhysicOffset = offset;
-            return mappedFile.appendMessage(this.byteBufferIndex.array());
+            return mappedFile.appendMessage(this.byteBufferIndex.array());//更新到mappedFile中
         }
         return false;
     }

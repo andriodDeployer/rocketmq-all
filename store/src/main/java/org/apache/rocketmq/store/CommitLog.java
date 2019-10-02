@@ -144,8 +144,8 @@ public class CommitLog {
         int mappedFileSize = this.defaultMessageStore.getMessageStoreConfig().getMapedFileSizeCommitLog();
         MappedFile mappedFile = this.mappedFileQueue.findMappedFileByOffset(offset, returnFirstOnNotFound);
         if (mappedFile != null) {
-            int pos = (int) (offset % mappedFileSize);
-            SelectMappedBufferResult result = mappedFile.selectMappedBuffer(pos);
+            int pos = (int) (offset % mappedFileSize);//计算在指定文件的开始位置。
+            SelectMappedBufferResult result = mappedFile.selectMappedBuffer(pos);//获取mappedFile中从pos开始处的的所有可读数据。
             return result;
         }
 
@@ -231,7 +231,7 @@ public class CommitLog {
         final boolean readBody) {
         try {
             // 1 TOTAL SIZE
-            int totalSize = byteBuffer.getInt();
+            int totalSize = byteBuffer.getInt();//该条消息总长度
 
             // 2 MAGIC CODE
             int magicCode = byteBuffer.getInt();
@@ -249,13 +249,13 @@ public class CommitLog {
 
             int bodyCRC = byteBuffer.getInt();
 
-            int queueId = byteBuffer.getInt();
+            int queueId = byteBuffer.getInt();//消息传送的QueueId
 
             int flag = byteBuffer.getInt();
 
             long queueOffset = byteBuffer.getLong();
 
-            long physicOffset = byteBuffer.getLong();
+            long physicOffset = byteBuffer.getLong();//消息的开始位置在CommitLog中的offset。
 
             int sysFlag = byteBuffer.getInt();
 
@@ -342,7 +342,7 @@ public class CommitLog {
                     totalSize, readLength, bodyLen, topicLen, propertiesLength);
                 return new DispatchRequest(totalSize, false/* success */);
             }
-
+//commitLog中一条消息中的内容封装
             return new DispatchRequest(
                 topic,
                 queueId,

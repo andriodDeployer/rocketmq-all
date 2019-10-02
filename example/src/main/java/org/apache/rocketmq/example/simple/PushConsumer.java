@@ -30,16 +30,21 @@ public class PushConsumer {
 
     public static void main(String[] args) throws InterruptedException, MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_JODIE_1");
-        consumer.subscribe("TopicTest", "*");
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-        //wrong time format 2017_0422_221800
+        consumer.subscribe("mytopic", "*");
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         consumer.setNamesrvAddr("127.0.0.1:9876");
-        consumer.setConsumeTimestamp("20181109221800");
+       // consumer.setConsumeTimestamp("20181109221800");
         consumer.registerMessageListener(new MessageListenerConcurrently() {
-
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-                System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+               // System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
+                for(MessageExt ext : msgs){
+                    int queueId = ext.getQueueId();
+                    String result  = new String(ext.getBody());
+
+                    System.out.println("消息为：队列id "+queueId + "  内容:"+result);
+
+                }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });

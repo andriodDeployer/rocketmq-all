@@ -131,8 +131,8 @@ public class DefaultMessageStore implements MessageStore {
         this.indexService.start();
 
         this.dispatcherList = new LinkedList<>();
-        this.dispatcherList.addLast(new CommitLogDispatcherBuildConsumeQueue());
-        this.dispatcherList.addLast(new CommitLogDispatcherBuildIndex());
+        this.dispatcherList.addLast(new CommitLogDispatcherBuildConsumeQueue());//更新ConsumeQueue
+        this.dispatcherList.addLast(new CommitLogDispatcherBuildIndex());//更新IndexQueue
 
         File file = new File(StorePathConfigHelper.getLockFile(messageStoreConfig.getStorePathRootDir()));
         MappedFile.ensureDirOK(file.getParent());
@@ -1077,6 +1077,7 @@ public class DefaultMessageStore implements MessageStore {
 
         ConsumeQueue logic = map.get(queueId);
         if (null == logic) {
+            //创建一个ConsumeQueue。
             ConsumeQueue newLogic = new ConsumeQueue(
                 topic,
                 queueId,
@@ -1354,14 +1355,14 @@ public class DefaultMessageStore implements MessageStore {
     }
 
     public void doDispatch(DispatchRequest req) {
-        for (CommitLogDispatcher dispatcher : this.dispatcherList) {
+        for (CommitLogDispatcher dispatcher : this.dispatcherList) {//两个dispathcherList，分别是ConsumeQueue和IndexQueue
             dispatcher.dispatch(req);
         }
     }
 
     public void putMessagePositionInfo(DispatchRequest dispatchRequest) {
-        ConsumeQueue cq = this.findConsumeQueue(dispatchRequest.getTopic(), dispatchRequest.getQueueId());
-        cq.putMessagePositionInfoWrapper(dispatchRequest);
+        ConsumeQueue cq = this.findConsumeQueue(dispatchRequest.getTopic(), dispatchRequest.getQueueId());//获取或者产生一个ConsumeQueue
+        cq.putMessagePositionInfoWrapper(dispatchRequest);//将request中的内容，添加到ConsumeQueue中
     }
 
     @Override
@@ -1422,7 +1423,7 @@ public class DefaultMessageStore implements MessageStore {
 
         @Override
         public void dispatch(DispatchRequest request) {
-            if (DefaultMessageStore.this.messageStoreConfig.isMessageIndexEnable()) {
+            if (DefaultMessageStore.this.messageStoreConfig.isMessageIndexEnable()) {//index是一个可选项
                 DefaultMessageStore.this.indexService.buildIndex(request);
             }
         }
@@ -1699,7 +1700,7 @@ public class DefaultMessageStore implements MessageStore {
 
     class ReputMessageService extends ServiceThread {
 
-        private volatile long reputFromOffset = 0;
+        private volatile long reputFromOffset = 0;//CommitLog中已经更新到CommitQueue中索引。
 
         public long getReputFromOffset() {
             return reputFromOffset;
@@ -1741,20 +1742,21 @@ public class DefaultMessageStore implements MessageStore {
                     && this.reputFromOffset >= DefaultMessageStore.this.getConfirmOffset()) {
                     break;
                 }
-
+//reputFromOffset:CommitLog中的物理位置，也就是从commitLog中的这个位置开始更新到ConsumeQueue中,读取批量消息
                 SelectMappedBufferResult result = DefaultMessageStore.this.commitLog.getData(reputFromOffset);
                 if (result != null) {
                     try {
-                        this.reputFromOffset = result.getStartOffset();
+                        this.reputFromOffset = result.getStartOffset();//。
 
                         for (int readSize = 0; readSize < result.getSize() && doNext; ) {
+                            //读取一条消息 // TODO: 2019/10/1 读取部分消息，也就是读到文件末尾了，但是消息没有读完。
                             DispatchRequest dispatchRequest =
                                 DefaultMessageStore.this.commitLog.checkMessageAndReturnSize(result.getByteBuffer(), false, false);
                             int size = dispatchRequest.getMsgSize();
 
                             if (dispatchRequest.isSuccess()) {
                                 if (size > 0) {
-                                    DefaultMessageStore.this.doDispatch(dispatchRequest);
+                                    DefaultMessageStore.this.doDispatch(dispatchRequest);//将这条消息，更新到consumeQueue和indexFile中。
 
                                     if (BrokerRole.SLAVE != DefaultMessageStore.this.getMessageStoreConfig().getBrokerRole()
                                         && DefaultMessageStore.this.brokerConfig.isLongPollingEnable()) {
@@ -1764,7 +1766,7 @@ public class DefaultMessageStore implements MessageStore {
                                             dispatchRequest.getBitMap(), dispatchRequest.getPropertiesMap());
                                     }
 
-                                    this.reputFromOffset += size;
+                                    this.reputFromOffset += size;//更新offset
                                     readSize += size;
                                     if (DefaultMessageStore.this.getMessageStoreConfig().getBrokerRole() == BrokerRole.SLAVE) {
                                         DefaultMessageStore.this.storeStatsService
@@ -1808,7 +1810,7 @@ public class DefaultMessageStore implements MessageStore {
 
             while (!this.isStopped()) {
                 try {
-                    Thread.sleep(1);
+                    Thread.sleep(1);//每个1毫秒执行一次doReput
                     this.doReput();
                 } catch (Exception e) {
                     DefaultMessageStore.log.warn(this.getServiceName() + " service has exception. ", e);

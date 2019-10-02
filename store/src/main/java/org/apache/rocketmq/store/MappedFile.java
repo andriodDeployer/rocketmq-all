@@ -154,15 +154,15 @@ public class MappedFile extends ReferenceResource {
     private void init(final String fileName, final int fileSize) throws IOException {
         this.fileName = fileName;
         this.fileSize = fileSize;
-        this.file = new File(fileName);
-        this.fileFromOffset = Long.parseLong(this.file.getName());
+        this.file = new File(fileName);//存储数据的文件。
+        this.fileFromOffset = Long.parseLong(this.file.getName());//文件开始的位置，通常文件名就是这个文件开始的offset。001024,002048等。
         boolean ok = false;
 
         ensureDirOK(this.file.getParent());
 
         try {
             this.fileChannel = new RandomAccessFile(this.file, "rw").getChannel();
-            this.mappedByteBuffer = this.fileChannel.map(MapMode.READ_WRITE, 0, fileSize);
+            this.mappedByteBuffer = this.fileChannel.map(MapMode.READ_WRITE, 0, fileSize);//和文件大小一样的映射区。使用mapped也是一种zerocopy的实现。
             TOTAL_MAPPED_VIRTUAL_MEMORY.addAndGet(fileSize);
             TOTAL_MAPPED_FILES.incrementAndGet();
             ok = true;

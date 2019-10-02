@@ -799,7 +799,7 @@ public class BrokerController {
     }
 
     public void start() throws Exception {
-        //消息存储服务
+        //消息存储服务,commitLog和ConsumeQueue的存储
         if (this.messageStore != null) {
             this.messageStore.start();
         }

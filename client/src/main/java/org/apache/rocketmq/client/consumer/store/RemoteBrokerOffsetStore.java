@@ -44,7 +44,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
     private final static InternalLogger log = ClientLogger.getLog();
     private final MQClientInstance mQClientFactory;
     private final String groupName;//对指定的group进行管理
-    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable = //每个group对应多个mq的消费位置。
+    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable = //mq的消费位置。
         new ConcurrentHashMap<MessageQueue, AtomicLong>();
 
     public RemoteBrokerOffsetStore(MQClientInstance mQClientFactory, String groupName) {
@@ -211,6 +211,8 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
         }
 
         if (findBrokerResult != null) {
+            //添加将 mq向哪个broker发送offset信息
+            System.out.println("发送："+mq.getBrokerName()+":"+mq.getQueueId() + " 到" + findBrokerResult.getBrokerAddr()+"  "+findBrokerResult.isSlave());
             UpdateConsumerOffsetRequestHeader requestHeader = new UpdateConsumerOffsetRequestHeader();
             requestHeader.setTopic(mq.getTopic());
             requestHeader.setConsumerGroup(this.groupName);
@@ -232,6 +234,9 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
     private long fetchConsumeOffsetFromBroker(MessageQueue mq) throws RemotingException, MQBrokerException,
         InterruptedException, MQClientException {
         FindBrokerResult findBrokerResult = this.mQClientFactory.findBrokerAddressInAdmin(mq.getBrokerName());
+        //添加从哪个broker获取offset的日志
+        System.out.println("获取"+mq.getBrokerName()+":"+mq.getQueueId() +" 从 "+findBrokerResult.getBrokerAddr()+"  "+findBrokerResult.isSlave());
+
         if (null == findBrokerResult) {
 
             this.mQClientFactory.updateTopicRouteInfoFromNameServer(mq.getTopic());

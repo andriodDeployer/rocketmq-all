@@ -23,7 +23,8 @@ import org.apache.rocketmq.common.utils.ThreadUtils;
 import org.apache.rocketmq.logging.InternalLogger;
 
 import java.util.concurrent.*;
-//不断地PullRequestQueue中获取PullRequest，并将拉取请求发送到broker上，
+/**不断地PullRequestQueue中获取PullRequest，并将拉取请求发送到broker上，
+ */
 public class PullMessageService extends ServiceThread {
     private final InternalLogger log = ClientLogger.getLog();
     private final LinkedBlockingQueue<PullRequest> pullRequestQueue = new LinkedBlockingQueue<PullRequest>();

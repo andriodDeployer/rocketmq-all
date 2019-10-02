@@ -267,7 +267,7 @@ public abstract class RebalanceImpl {
                 if (mqSet != null && cidAll != null) {
                     List<MessageQueue> mqAll = new ArrayList<MessageQueue>();
                     mqAll.addAll(mqSet);
-
+//进行排序，在按照相同的分配策略进行分配的话，可以保证每次都能同相同的mq中读取消息。
                     Collections.sort(mqAll);
                     Collections.sort(cidAll);
 

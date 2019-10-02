@@ -97,6 +97,7 @@ public class MessageQueue implements Comparable<MessageQueue>, Serializable {
         return "MessageQueue [topic=" + topic + ", brokerName=" + brokerName + ", queueId=" + queueId + "]";
     }
 
+    //先按照topic进行排序，如果相同的话，在按照brokerName进行排序
     @Override
     public int compareTo(MessageQueue o) {
         {
