@@ -28,7 +28,8 @@ public class Producer {
         DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName");
         producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
-        producer.createTopic("TopicTest","mytopic",3);
+//        producer.createTopic("TBW102","mytopic1",3);
+        producer.createTopic("mytopic","mytopic1",3);
         for (int i = 0; i < 12800; i++)
             try {
                 {
