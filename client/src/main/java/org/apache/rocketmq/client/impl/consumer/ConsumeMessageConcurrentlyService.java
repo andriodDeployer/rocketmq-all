@@ -201,7 +201,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
             } catch (RejectedExecutionException e) {
                 this.submitConsumeRequestLater(consumeRequest);
             }
-        } else {
+        } else {//分成多次
             for (int total = 0; total < msgs.size(); ) {
                 List<MessageExt> msgThis = new ArrayList<MessageExt>(consumeBatchSize);
                 for (int i = 0; i < consumeBatchSize; i++, total++) {
@@ -266,7 +266,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
                 this.getConsumerStatsManager().incConsumeOKTPS(consumerGroup, consumeRequest.getMessageQueue().getTopic(), ok);
                 this.getConsumerStatsManager().incConsumeFailedTPS(consumerGroup, consumeRequest.getMessageQueue().getTopic(), failed);
                 break;
-            case RECONSUME_LATER:
+            case RECONSUME_LATER://本次消费失败，
                 ackIndex = -1;
                 this.getConsumerStatsManager().incConsumeFailedTPS(consumerGroup, consumeRequest.getMessageQueue().getTopic(),
                     consumeRequest.getMsgs().size());
@@ -279,7 +279,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
             case BROADCASTING:
                 for (int i = ackIndex + 1; i < consumeRequest.getMsgs().size(); i++) {
                     MessageExt msg = consumeRequest.getMsgs().get(i);
-                    log.warn("BROADCASTING, the message consume failed, drop it, {}", msg.toString());
+                    log.warn("BROADCASTING, the message consume failed, drop it, {}", msg.toString());//虽然消费失败了，然而没做任何额外的处理，采用的和成功处理一样的流程，将这个消息从processQueue删除。
                 }
                 break;
             case CLUSTERING:
@@ -288,7 +288,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
                     MessageExt msg = consumeRequest.getMsgs().get(i);
                     boolean result = this.sendMessageBack(msg, context);
                     if (!result) {
-                        msg.setReconsumeTimes(msg.getReconsumeTimes() + 1);
+                        msg.setReconsumeTimes(msg.getReconsumeTimes() + 1);//更新重试次数
                         msgBackFailed.add(msg);
                     }
                 }
@@ -303,7 +303,7 @@ public class ConsumeMessageConcurrentlyService implements ConsumeMessageService 
                 break;
         }
 
-        long offset = consumeRequest.getProcessQueue().removeMessage(consumeRequest.getMsgs());
+        long offset = consumeRequest.getProcessQueue().removeMessage(consumeRequest.getMsgs());//返回的offset总是processQueue中最小的offset，那么updateOffset到内存中的offset就会偏小，如果这个consumer重启，或者这队列分配给其他consumer时，从broker获取的offset就会偏小，导致消息重复消费。
         if (offset >= 0 && !consumeRequest.getProcessQueue().isDropped()) {
             this.defaultMQPushConsumerImpl.getOffsetStore().updateOffset(consumeRequest.getMessageQueue(), offset, true);
         }

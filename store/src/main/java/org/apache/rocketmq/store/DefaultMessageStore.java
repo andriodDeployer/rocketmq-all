@@ -217,9 +217,9 @@ public class DefaultMessageStore implements MessageStore {
         } else {
             this.reputMessageService.setReputFromOffset(this.commitLog.getMaxOffset());
         }
-        this.reputMessageService.start();
+        this.reputMessageService.start();//定时更新consumerQueue中的内容。
 
-        this.haService.start();
+        this.haService.start();//启动HAService，
 
         this.createTempFile();
         this.addScheduleTask();
@@ -445,7 +445,7 @@ public class DefaultMessageStore implements MessageStore {
 
         GetMessageResult getResult = new GetMessageResult();
 
-        final long maxOffsetPy = this.commitLog.getMaxOffset();
+        final long maxOffsetPy = this.commitLog.getMaxOffset();//commitLog中的可写位置。
 
         ConsumeQueue consumeQueue = findConsumeQueue(topic, queueId);//找到指定的队列ConsumeQueue信息
         if (consumeQueue != null) {
@@ -555,10 +555,10 @@ public class DefaultMessageStore implements MessageStore {
 
                         nextBeginOffset = offset + (i / ConsumeQueue.CQ_STORE_UNIT_SIZE);//下一次读取消息的索引。
 
-                        long diff = maxOffsetPy - maxPhyOffsetPulling;
+                        long diff = maxOffsetPy - maxPhyOffsetPulling;//maxOffsetPy：commitLog中最大可读位置，maxPhyOffsetPulling：当前读取消息的位置，diff可以理解将要读取的消息量，或者维度的消息量，这个值过大，导致在未来一段时间，当前主机会很忙碌。
                         long memory = (long) (StoreUtil.TOTAL_PHYSICAL_MEMORY_SIZE
                             * (this.messageStoreConfig.getAccessMessageInMemoryMaxRatio() / 100.0));
-                        getResult.setSuggestPullingFromSlave(diff > memory);
+                        getResult.setSuggestPullingFromSlave(diff > memory);//未处理的消息过多。从salve中读取。
                     } finally {
 
                         bufferConsumeQueue.release();

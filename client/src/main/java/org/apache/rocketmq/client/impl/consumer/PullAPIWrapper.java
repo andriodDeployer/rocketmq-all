@@ -68,7 +68,7 @@ public class PullAPIWrapper {
         final SubscriptionData subscriptionData) {
         PullResultExt pullResultExt = (PullResultExt) pullResult;
 
-        this.updatePullFromWhichNode(mq, pullResultExt.getSuggestWhichBrokerId());
+        this.updatePullFromWhichNode(mq, pullResultExt.getSuggestWhichBrokerId());//设置下一次从那个broker上获取消息。
         if (PullStatus.FOUND == pullResult.getPullStatus()) {
             ByteBuffer byteBuffer = ByteBuffer.wrap(pullResultExt.getMessageBinary());
             List<MessageExt> msgList = MessageDecoder.decodes(byteBuffer);
@@ -192,7 +192,7 @@ public class PullAPIWrapper {
             if (PullSysFlag.hasClassFilterFlag(sysFlagInner)) {
                 brokerAddr = computPullFromWhichFilterServer(mq.getTopic(), brokerAddr);
             }
-            System.out.println("从"+brokerAddr+"     "+mq.getTopic()+":"+mq.getQueueId()+"    拉取消息");
+           // System.out.println("从"+brokerAddr+"     "+mq.getTopic()+":"+mq.getQueueId()+"    拉取消息");
             PullResult pullResult = this.mQClientFactory.getMQClientAPIImpl().pullMessage(
                 brokerAddr,
                 requestHeader,

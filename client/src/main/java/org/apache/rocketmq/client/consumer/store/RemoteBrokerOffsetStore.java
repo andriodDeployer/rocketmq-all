@@ -65,7 +65,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
             }
 
             if (null != offsetOld) {
-                if (increaseOnly) {
+                if (increaseOnly) {//如果是递增的话，不会更新为小值。
                     MixAll.compareAndIncreaseOnly(offsetOld, offset);
                 } else {
                     offsetOld.set(offset);
@@ -197,8 +197,8 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
     }
 
     /**
-     * Update the Consumer Offset synchronously, once the Master is off, updated to Slave,
-     * here need to be optimized.
+     * Update the Consumer Offset synchronously, once the Master is off, updated to Slave,优先选择master，如果master宕机，那么就更新到slave上。
+     * here need to be optimized.因为maser的id是0，所以遍历的时候，第一个遍历到的肯定是master。
      */
     @Override
     public void updateConsumeOffsetToBroker(MessageQueue mq, long offset, boolean isOneway) throws RemotingException,
@@ -212,7 +212,7 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
 
         if (findBrokerResult != null) {
             //添加将 mq向哪个broker发送offset信息
-            System.out.println("发送："+mq.getBrokerName()+":"+mq.getQueueId() + " 到" + findBrokerResult.getBrokerAddr()+"  "+findBrokerResult.isSlave());
+          //  System.out.println("更新："+mq.getBrokerName()+":"+mq.getQueueId() + " 到" + findBrokerResult.getBrokerAddr()+"  "+findBrokerResult.isSlave());
             UpdateConsumerOffsetRequestHeader requestHeader = new UpdateConsumerOffsetRequestHeader();
             requestHeader.setTopic(mq.getTopic());
             requestHeader.setConsumerGroup(this.groupName);
@@ -235,8 +235,6 @@ public class RemoteBrokerOffsetStore implements OffsetStore {
         InterruptedException, MQClientException {
         FindBrokerResult findBrokerResult = this.mQClientFactory.findBrokerAddressInAdmin(mq.getBrokerName());
         //添加从哪个broker获取offset的日志
-        System.out.println("获取"+mq.getBrokerName()+":"+mq.getQueueId() +" 从 "+findBrokerResult.getBrokerAddr()+"  "+findBrokerResult.isSlave());
-
         if (null == findBrokerResult) {
 
             this.mQClientFactory.updateTopicRouteInfoFromNameServer(mq.getTopic());

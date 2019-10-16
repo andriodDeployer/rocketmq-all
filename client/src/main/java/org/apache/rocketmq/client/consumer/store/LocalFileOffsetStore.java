@@ -16,6 +16,17 @@
  */
 package org.apache.rocketmq.client.consumer.store;
 
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.impl.factory.MQClientInstance;
+import org.apache.rocketmq.client.log.ClientLogger;
+import org.apache.rocketmq.common.MixAll;
+import org.apache.rocketmq.common.UtilAll;
+import org.apache.rocketmq.common.help.FAQUrl;
+import org.apache.rocketmq.common.message.MessageQueue;
+import org.apache.rocketmq.logging.InternalLogger;
+import org.apache.rocketmq.remoting.exception.RemotingException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,29 +35,19 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
-import org.apache.rocketmq.client.exception.MQBrokerException;
-import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.impl.factory.MQClientInstance;
-import org.apache.rocketmq.client.log.ClientLogger;
-import org.apache.rocketmq.common.MixAll;
-import org.apache.rocketmq.common.UtilAll;
-import org.apache.rocketmq.common.help.FAQUrl;
-import org.apache.rocketmq.logging.InternalLogger;
-import org.apache.rocketmq.common.message.MessageQueue;
-import org.apache.rocketmq.remoting.exception.RemotingException;
 
 /**
  * Local storage implementation
  */
 public class LocalFileOffsetStore implements OffsetStore {
     public final static String LOCAL_OFFSET_STORE_DIR = System.getProperty(
-        "rocketmq.client.localOffsetStoreDir",
+        "rocketmq.client.localOffsetStoreDir",//可以在启动参数中以-D设置。
         System.getProperty("user.home") + File.separator + ".rocketmq_offsets");
     private final static InternalLogger log = ClientLogger.getLog();
     private final MQClientInstance mQClientFactory;
     private final String groupName;
     private final String storePath;
-    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable =
+    private ConcurrentMap<MessageQueue, AtomicLong> offsetTable =//内存中的数据结构。
         new ConcurrentHashMap<MessageQueue, AtomicLong>();
 
     public LocalFileOffsetStore(MQClientInstance mQClientFactory, String groupName) {
@@ -75,7 +76,7 @@ public class LocalFileOffsetStore implements OffsetStore {
     }
 
     @Override
-    public void updateOffset(MessageQueue mq, long offset, boolean increaseOnly) {
+    public void updateOffset(MessageQueue mq, long offset, boolean increaseOnly) {//按照顺序存放。
         if (mq != null) {
             AtomicLong offsetOld = this.offsetTable.get(mq);
             if (null == offsetOld) {
@@ -101,7 +102,7 @@ public class LocalFileOffsetStore implements OffsetStore {
                     AtomicLong offset = this.offsetTable.get(mq);
                     if (offset != null) {
                         return offset.get();
-                    } else if (ReadOffsetType.READ_FROM_MEMORY == type) {
+                    } else if (ReadOffsetType.READ_FROM_MEMORY == type) {//如果是MEMORY_FIRST_THEN_STORE的话，则执行READ_FROM_STORE中读取。
                         return -1;
                     }
                 }

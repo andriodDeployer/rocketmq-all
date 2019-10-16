@@ -296,7 +296,7 @@ public class DefaultMQPushConsumerImpl implements MQConsumerInner {
 
                                 DefaultMQPushConsumerImpl.this.getConsumerStatsManager().incPullTPS(pullRequest.getConsumerGroup(),
                                     pullRequest.getMessageQueue().getTopic(), pullResult.getMsgFoundList().size());
-                                //一个线程不断地从broker获取消息放到processQueeu中，然后线程池中线程不断取出消息进行处理。
+                                //一个线程(应该是netty的业务线程，防止io线程阻塞)不断地从broker获取消息放到processQueeu中，然后在ConsumerMessageService中线程不断取出消息进行处理。
                             //将拉取的消息放到processQueue中，
                                 boolean dispatchToConsume = processQueue.putMessage(pullResult.getMsgFoundList());
                             //处理消息，大致逻辑就是取出processQueue中的数据封装成ConsumeRequest，让consumerMessageService进行处理。

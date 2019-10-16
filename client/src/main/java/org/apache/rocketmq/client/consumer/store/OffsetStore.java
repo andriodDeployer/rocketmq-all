@@ -16,12 +16,13 @@
  */
 package org.apache.rocketmq.client.consumer.store;
 
-import java.util.Map;
-import java.util.Set;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageQueue;
 import org.apache.rocketmq.remoting.exception.RemotingException;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Offset store interface
@@ -38,7 +39,7 @@ public interface OffsetStore {
     void updateOffset(final MessageQueue mq, final long offset, final boolean increaseOnly);
 
     /**
-     * Get offset from local storage
+     * Get offset from local storage or remote name server which depend on type.
      *
      * @return The fetched offset
      */

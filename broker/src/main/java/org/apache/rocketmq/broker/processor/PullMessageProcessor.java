@@ -238,7 +238,7 @@ public class PullMessageProcessor implements NettyRequestProcessor {
             responseHeader.setNextBeginOffset(getMessageResult.getNextBeginOffset());
             responseHeader.setMinOffset(getMessageResult.getMinOffset());
             responseHeader.setMaxOffset(getMessageResult.getMaxOffset());
-
+//每次都会判断的。
             if (getMessageResult.isSuggestPullingFromSlave()) {
                 responseHeader.setSuggestWhichBrokerId(subscriptionGroupConfig.getWhichBrokerWhenConsumeSlowly());
             } else {
@@ -250,9 +250,9 @@ public class PullMessageProcessor implements NettyRequestProcessor {
                 case SYNC_MASTER:
                     break;
                 case SLAVE:
-                    if (!this.brokerController.getBrokerConfig().isSlaveReadEnable()) {//如果当前就是slave的话，
+                    if (!this.brokerController.getBrokerConfig().isSlaveReadEnable()) {//如果当前就是slave的话，且设置的salve不可读。
                         response.setCode(ResponseCode.PULL_RETRY_IMMEDIATELY);
-                        responseHeader.setSuggestWhichBrokerId(MixAll.MASTER_ID);
+                        responseHeader.setSuggestWhichBrokerId(MixAll.MASTER_ID);//从
                     }
                     break;
             }

@@ -127,17 +127,17 @@ public class ProcessQueue {
             try {
                 int validMsgCnt = 0;
                 for (MessageExt msg : msgs) {
-                    MessageExt old = msgTreeMap.put(msg.getQueueOffset(), msg);//将消息存放到msgTreeMap中
+                    MessageExt old = msgTreeMap.put(msg.getQueueOffset(), msg);//将消息存放到msgTreeMap中，以offset为key，map中的数据一个key进行排序。
                     if (null == old) {
                         validMsgCnt++;
-                        this.queueOffsetMax = msg.getQueueOffset();
+                        this.queueOffsetMax = msg.getQueueOffset();//必须保证传递给putMessage的参数msgs中的offset严格递增的才可以。todo 并发消费是否会产生影响？不会的，因为并发消费的实现是在顺序将消息放到processQueue中之后实现的。
                         msgSize.addAndGet(msg.getBody().length);
                     }
                 }
                 msgCount.addAndGet(validMsgCnt);
 
-                if (!msgTreeMap.isEmpty() && !this.consuming) {
-                    dispatchToConsume = true;
+                if (!msgTreeMap.isEmpty() && !this.consuming) {//说明当前没有在消费。
+                    dispatchToConsume = true;//标记为正在消费
                     this.consuming = true;
                 }
 
@@ -198,7 +198,7 @@ public class ProcessQueue {
                     msgCount.addAndGet(removedCnt);
 
                     if (!msgTreeMap.isEmpty()) {
-                        result = msgTreeMap.firstKey();
+                        result = msgTreeMap.firstKey();//总是返回。map中的最小的offset。
                     }
                 }
             } finally {
@@ -259,7 +259,7 @@ public class ProcessQueue {
             try {
                 Long offset = this.consumingMsgOrderlyTreeMap.lastKey();
                 msgCount.addAndGet(0 - this.consumingMsgOrderlyTreeMap.size());
-                for (MessageExt msg : this.consumingMsgOrderlyTreeMap.values()) {
+                for (MessageExt msg : this.consumingMsgOrderlyTreeMap.values()) {//consumingMsgOrderlyTreeMap而非MsgTreeMap.
                     msgSize.addAndGet(0 - msg.getBody().length);
                 }
                 this.consumingMsgOrderlyTreeMap.clear();
@@ -301,10 +301,10 @@ public class ProcessQueue {
             try {
                 if (!this.msgTreeMap.isEmpty()) {
                     for (int i = 0; i < batchSize; i++) {
-                        Map.Entry<Long, MessageExt> entry = this.msgTreeMap.pollFirstEntry();//取出并删除
+                        Map.Entry<Long, MessageExt> entry = this.msgTreeMap.pollFirstEntry();//从第一个开始取，取出的是key最小的，也就是，offset最小的。
                         if (entry != null) {
                             result.add(entry.getValue());
-                            consumingMsgOrderlyTreeMap.put(entry.getKey(), entry.getValue());//添加到正在消费的consumingMsgOrderTreeMap中
+                            consumingMsgOrderlyTreeMap.put(entry.getKey(), entry.getValue());//添加到正在消费的consumingMsgOrderTreeMap中,表示这批消息正在消费。
                         } else {
                             break;
                         }

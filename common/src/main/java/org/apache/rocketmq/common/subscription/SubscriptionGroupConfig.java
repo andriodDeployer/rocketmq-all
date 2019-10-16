@@ -28,13 +28,13 @@ public class SubscriptionGroupConfig {//一个消费者组，消费的信息。
 
     private boolean consumeBroadcastEnable = true;
 
-    private int retryQueueNums = 1;
+    private int retryQueueNums = 1;//重试topic中，队列的个数。
 
     private int retryMaxTimes = 16;
 
-    private long brokerId = MixAll.MASTER_ID;
+    private long brokerId = MixAll.MASTER_ID;//默认从那个broker上读取消息
 
-    private long whichBrokerWhenConsumeSlowly = 1;
+    private long whichBrokerWhenConsumeSlowly = 1;//当消费慢的时候，从哪个broker上读取消息
 
     private boolean notifyConsumerIdsChangedEnable = true;
 

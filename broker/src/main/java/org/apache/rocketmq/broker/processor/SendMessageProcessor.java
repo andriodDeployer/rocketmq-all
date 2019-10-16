@@ -134,7 +134,7 @@ public class SendMessageProcessor extends AbstractSendMessageProcessor implement
             return response;
         }
 
-        String newTopic = MixAll.getRetryTopic(requestHeader.getGroup());
+        String newTopic = MixAll.getRetryTopic(requestHeader.getGroup());//获取新的Topic名称，名称为%RETRY%GROUPNAME
         int queueIdInt = Math.abs(this.random.nextInt() % 99999999) % subscriptionGroupConfig.getRetryQueueNums();
 
         int topicSysFlag = 0;
@@ -180,7 +180,7 @@ public class SendMessageProcessor extends AbstractSendMessageProcessor implement
 
         if (msgExt.getReconsumeTimes() >= maxReconsumeTimes
             || delayLevel < 0) {
-            newTopic = MixAll.getDLQTopic(requestHeader.getGroup());
+            newTopic = MixAll.getDLQTopic(requestHeader.getGroup());//重试次数过多的时候，使用的topic为%DLQ%GROPUNAME
             queueIdInt = Math.abs(this.random.nextInt() % 99999999) % DLQ_NUMS_PER_GROUP;
 
             topicConfig = this.brokerController.getTopicConfigManager().createTopicInSendMessageBackMethod(newTopic,

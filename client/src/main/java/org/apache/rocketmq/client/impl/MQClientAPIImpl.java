@@ -862,6 +862,7 @@ public class MQClientAPIImpl {
         return response.getCode() == ResponseCode.SUCCESS;
     }
 
+    //同步发送的。
     public void consumerSendMessageBack(
         final String addr,
         final MessageExt msg,

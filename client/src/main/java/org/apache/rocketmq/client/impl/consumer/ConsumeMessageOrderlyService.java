@@ -185,7 +185,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
         final ProcessQueue processQueue,
         final MessageQueue messageQueue,
         final boolean dispathToConsume) {
-        if (dispathToConsume) {
+        if (dispathToConsume) {//控制是否多个线程并发处理同一个processqueue中的数据，即使run方法加了锁。
             ConsumeRequest consumeRequest = new ConsumeRequest(processQueue, messageQueue);
             this.consumeExecutor.submit(consumeRequest);
         }
@@ -262,7 +262,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
         if (context.isAutoCommit()) {
             switch (status) {
                 case COMMIT:
-                case ROLLBACK:
+                case ROLLBACK://自动提交的状态下，不能有回滚和commit状态。
                     log.warn("the message queue consume result is illegal, we think you want to ack these message {}",
                         consumeRequest.getMessageQueue());
                 case SUCCESS:
@@ -309,7 +309,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                             consumeRequest.getProcessQueue(),
                             consumeRequest.getMessageQueue(),
                             context.getSuspendCurrentQueueTimeMillis());
-                        continueConsume = false;
+                        continueConsume = false;//目的主要为了释放锁。
                     }
                     break;
                 default:
@@ -343,10 +343,10 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
             for (MessageExt msg : msgs) {
                 if (msg.getReconsumeTimes() >= getMaxReconsumeTimes()) {
                     MessageAccessor.setReconsumeTime(msg, String.valueOf(msg.getReconsumeTimes()));
-                    if (!sendMessageBack(msg)) {
-                        suspend = true;
+                    if (!sendMessageBack(msg)) {//如果查过了一定次数后。重新发送该消息到broker中。这个消息称为一个内容不变的新消息。如果一个发送成功，todo 一个发送失败呢？
+                        suspend = true;//保证所有消息全都发送到死信队列中。
                         msg.setReconsumeTimes(msg.getReconsumeTimes() + 1);
-                    }
+                     }
                 } else {
                     suspend = true;
                     msg.setReconsumeTimes(msg.getReconsumeTimes() + 1);
@@ -358,7 +358,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
 
     public boolean sendMessageBack(final MessageExt msg) {
         try {
-            // max reconsume times exceeded then send to dead letter queue.
+            // max reconsume times exceeded then send to dead letter queue.//在本地重试很多次都没有成功的消息发送到死信队列中。
             Message newMsg = new Message(MixAll.getRetryTopic(this.defaultMQPushConsumer.getConsumerGroup()), msg.getBody());
             String originMsgId = MessageAccessor.getOriginMessageId(msg);
             MessageAccessor.setOriginMessageId(newMsg, UtilAll.isBlank(originMsgId) ? msg.getMsgId() : originMsgId);
@@ -402,8 +402,11 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                 return;
             }
 
+            System.out.println(Thread.currentThread().getId()+" 获取锁 "+this.messageQueue.getQueueId());
             final Object objLock = messageQueueLock.fetchLockObject(this.messageQueue);//用message保证同一个队里消息消费的顺序性，不同队列消息消费并行性
             synchronized (objLock) {//体现锁的实现。同一时刻只能一个consumer在进行消费。
+                long start = System.currentTimeMillis();
+                System.out.println(Thread.currentThread().getId()+" 获取到锁 "+this.messageQueue.getQueueId());
                 if (MessageModel.BROADCASTING.equals(ConsumeMessageOrderlyService.this.defaultMQPushConsumerImpl.messageModel())
                     || (this.processQueue.isLocked() && !this.processQueue.isLockExpired())) {
                     final long beginTime = System.currentTimeMillis();
@@ -466,7 +469,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
                                         this.messageQueue);
                                     break;
                                 }
-                            //调用监听器处理消息，因为无法保证客户端实现的处理逻辑是线程安全的，所以在调用前保证线程安全。
+                            //调用监听器处理消息，因为无法保证客户端实现的处理逻辑是线程安全的，所以在调用前保证线程安全。返回的是一批消息的消费状态。
                                 status = messageListener.consumeMessage(Collections.unmodifiableList(msgs), context);
                             } catch (Throwable e) {
                                 log.warn("consumeMessage exception: {} Group: {} Msgs: {} MQ: {}",
@@ -534,6 +537,7 @@ public class ConsumeMessageOrderlyService implements ConsumeMessageService {
 
                     ConsumeMessageOrderlyService.this.tryLockLaterAndReconsume(this.messageQueue, this.processQueue, 100);
                 }
+                System.out.println(Thread.currentThread().getId()+" 释放锁,占用时间 "+(System.currentTimeMillis() - start));
             }
         }
 

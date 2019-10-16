@@ -29,12 +29,13 @@ public class Producer {
         producer.setNamesrvAddr("127.0.0.1:9876");
         producer.start();
 //        producer.createTopic("TBW102","mytopic1",3);
-        producer.createTopic("mytopic","mytopic1",3);
+      //  producer.createTopic("mytopic","mytopic1",3);
+        producer.createTopic("mytopic","mytopic2",1);
         for (int i = 0; i < 12800; i++)
             try {
                 {
                     Thread.sleep(5 * 1000);
-                    Message msg = new Message("mytopic",
+                    Message msg = new Message("mytopic2",
                         "TagA",
                         "OrderID188",
                             (i+"").getBytes(RemotingHelper.DEFAULT_CHARSET));

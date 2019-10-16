@@ -42,7 +42,7 @@ public abstract class RebalanceImpl {
     protected final ConcurrentMap<MessageQueue, ProcessQueue> processQueueTable = new ConcurrentHashMap<MessageQueue, ProcessQueue>(64);
     protected final ConcurrentMap<String/* topic */, Set<MessageQueue>> topicSubscribeInfoTable = //关于这个topic的所有mq信息，也就是所有brokerName对应的mqs
         new ConcurrentHashMap<String, Set<MessageQueue>>();
-    protected final ConcurrentMap<String /* topic */, SubscriptionData> subscriptionInner =//存放订阅的topic的信息
+    protected final ConcurrentMap<String /* topic */, SubscriptionData> subscriptionInner = //存放订阅的topic，的订阅信息
         new ConcurrentHashMap<String, SubscriptionData>();
     protected String consumerGroup;
     protected MessageModel messageModel;
@@ -235,7 +235,7 @@ public abstract class RebalanceImpl {
     private void rebalanceByTopic(final String topic, final boolean isOrder) {
         switch (messageModel) {
             case BROADCASTING: {
-                Set<MessageQueue> mqSet = this.topicSubscribeInfoTable.get(topic);//针对该topic，分配给该consumer的MessageQueue。
+                Set<MessageQueue> mqSet = this.topicSubscribeInfoTable.get(topic);//针对该topic，的所有messageQueue
                 if (mqSet != null) {
                     boolean changed = this.updateProcessQueueTableInRebalance(topic, mqSet, isOrder);
                     if (changed) {
@@ -275,7 +275,7 @@ public abstract class RebalanceImpl {
 
                     List<MessageQueue> allocateResult = null;//当前consumer被分配到额mq。
                     try {
-                        allocateResult = strategy.allocate(//使用指定的策略给当前consumer分配List<MessageQueue>// TODO: 2019/9/28 因为consumer运行在不同的进程中会不会产生分配冲突？
+                        allocateResult = strategy.allocate(//使用指定的策略给当前consumer分配List<MessageQueue>// TODO: 2019/9/28 因为consumer运行在不同的进程中会不会产生分配冲突？因为分配算法是固定的，算法处理的数据也是一样的，所以虽然在不同的进程中，但是分配不会产生冲突，而且，重分配会定时执行，如果数据发生了改变的话，会进行重新分配。
                             this.consumerGroup,
                             this.mQClientFactory.getClientId(),
                             mqAll,

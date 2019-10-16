@@ -561,7 +561,7 @@ public class MQClientInstance {
             }
         }
     }
-
+//从NamerServer上获取TopicRouteData信息，这个信息中是没有queueId信息的。
     public boolean updateTopicRouteInfoFromNameServer(final String topic, boolean isDefault,
         DefaultMQProducer defaultMQProducer) {
         try {
@@ -948,13 +948,13 @@ public class MQClientInstance {
     public MQConsumerInner selectConsumer(final String group) {
         return this.consumerTable.get(group);
     }
-
+//因为broker的id为0，默认情况下获取master。
     public FindBrokerResult findBrokerAddressInAdmin(final String brokerName) {
         String brokerAddr = null;
         boolean slave = false;
         boolean found = false;
 
-        HashMap<Long/* brokerId */, String/* address */> map = this.brokerAddrTable.get(brokerName);
+        HashMap<Long/* brokerId */, String/* address */> map = this.brokerAddrTable.get(brokerName);//因为masterbroker的id为0.所以遍历的时候第一个肯定是master。
         if (map != null && !map.isEmpty()) {
             for (Map.Entry<Long, String> entry : map.entrySet()) {
                 Long id = entry.getKey();
@@ -973,7 +973,7 @@ public class MQClientInstance {
         }
 
         if (found) {
-            return new FindBrokerResult("192.168.8.104:10911", slave, findBrokerVersion(brokerName, "192.168.8.104:10911"));
+            return new FindBrokerResult(brokerAddr, slave, findBrokerVersion(brokerName, brokerAddr));
         }
 
         return null;
@@ -987,7 +987,7 @@ public class MQClientInstance {
 
         return null;
     }
-
+//获取指定brokerId的addr
     public FindBrokerResult findBrokerAddressInSubscribe(
         final String brokerName,
         final long brokerId,
@@ -1064,8 +1064,8 @@ public class MQClientInstance {
             List<BrokerData> brokers = topicRouteData.getBrokerDatas();
             if (!brokers.isEmpty()) {
                 int index = random.nextInt(brokers.size());
-                BrokerData bd = brokers.get(index % brokers.size());
-                return bd.selectBrokerAddr();
+                BrokerData bd = brokers.get(index % brokers.size());//随机选择一个BrokerData。也就是brokerName。
+                return bd.selectBrokerAddr();//选择brokerName上的masterBroker如果master宕机的话，选择salve。
             }
         }
 
